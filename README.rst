@@ -1,0 +1,6 @@
+CookieEater
+===========
+
+**Browser Cookie Management**
+
+

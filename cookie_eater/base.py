@@ -25,14 +25,14 @@ def _to_secs(td):
     :return: float of seconds
     """
     if (sys.version_info[0:2] < (2, 7) or
-       (2, 7) <sys.version_info[0:2] < (3, 3)):
+       (2, 7) < sys.version_info[0:2] < (3, 3)):
         return ((td.microseconds + (td.seconds + td.days * 24 * 3600) * 10 **
                 6) / 10 ** 6)
     else:
         return td.total_seconds()
 
 
-def _get_platform():
+def get_platform():
     """
     Provides the common name of the platform the code is currently running on.
 
@@ -103,7 +103,7 @@ class CookieManager(object):
     def verify_schema(self):
         """Match the selected DB to the class's valid schema to verify
         compatibility. Raises InvalidSchema on error."""
-        conn =sqlite3.Connection(self.db)
+        conn = sqlite3.Connection(self.db)
         cur = conn.cursor()
         try:
             self._correct_tables_and_titles(cur)
@@ -117,7 +117,7 @@ class CookieManager(object):
         :return: Path the cookie file in the default profile as str
 
         """
-        cookies_path =os.path.expanduser(self._db_paths[_get_platform()])
+        cookies_path = os.path.expanduser(self._db_paths[get_platform()])
 
         cookies_path = self._find_db_extra(cookies_path)
 
