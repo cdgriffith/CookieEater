@@ -85,7 +85,7 @@ class CookieManager(object):
         """
         Performs table and column name lookup and makes sure they match the
         defined valid schema.
-        
+
         :param cur: SQLite cursor
         :type cur: sqlite3.Connection.cursor
         """
@@ -352,4 +352,3 @@ class CookieManager(object):
             return [self._row_to_dict(row) for row in rows]
         finally:
             conn.close()
-

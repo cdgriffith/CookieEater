@@ -95,4 +95,3 @@ class ChromeCookiesV1(CookieManager):
 
 class ChromeCookies(ChromeCookiesV1):
     """Current version of Chrome cookie management"""
-
