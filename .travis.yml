@@ -12,9 +12,10 @@ python:
     - "pypy"
 before_install:
     - sudo apt-get -qq update
-    - sudo apt-get install -y unrar sqlite3
+    - sudo apt-get install -y sqlite3
 install:
     - pip install -r requirements.txt
+    - pip install -r requirements-text.txt
     - pip install coveralls
-script: pytest --cov=reusables
+script: pytest --cov=reusables test/
 after_success: coveralls
