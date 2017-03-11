@@ -20,7 +20,8 @@ __all__ = ['CookieManager', 'BrowserException', 'InvalidSchema',
 
 
 def _to_secs(td):
-    """Compatibility for 2.6 and 3.2 for timedelta.total_seconds()
+    """
+    Compatibility for 2.6 and 3.2 for timedelta.total_seconds()
 
     :return: float of seconds
     """
@@ -81,10 +82,13 @@ class CookieManager(object):
         self.verify_schema()
 
     def _correct_tables_and_titles(self, cur):
-        """Performs table and column name lookup and makes sure they match the
+        """
+        Performs table and column name lookup and makes sure they match the
         defined valid schema.
+        
         :param cur: SQLite cursor
-        :type cur: sqlite3.Connection.cursor"""
+        :type cur: sqlite3.Connection.cursor
+        """
 
         grab_ts = cur.execute("SELECT name FROM sqlite_master "
                               "WHERE type = 'table'")
@@ -101,8 +105,10 @@ class CookieManager(object):
                 self._valid_structure["columns"], cols))
 
     def verify_schema(self):
-        """Match the selected DB to the class's valid schema to verify
-        compatibility. Raises InvalidSchema on error."""
+        """
+        Match the selected DB to the class's valid schema to verify
+        compatibility. Raises InvalidSchema on error.
+        """
         conn = sqlite3.Connection(self.db)
         cur = conn.cursor()
         try:
@@ -111,11 +117,11 @@ class CookieManager(object):
             conn.close()
 
     def find_db(self):
-        """Look at the default profile path based on system platform to
+        """
+        Look at the default profile path based on system platform to
         find the browser's cookie database.
 
         :return: Path the cookie file in the default profile as str
-
         """
         cookies_path = os.path.expanduser(self._db_paths[get_platform()])
 
@@ -134,8 +140,10 @@ class CookieManager(object):
     @unique(wait=1, exception=BrowserException,
             error_text="Could not generate unique timestamp")
     def _current_time(self, epoch=datetime.datetime(1970, 1, 1), length=16):
-        """Returns a string of the current time based on epoc date at a set
-         length of integers."""
+        """
+        Returns a string of the current time based on epoc date at a set
+         length of integers.
+         """
         delta_from_epic = (datetime.datetime.utcnow() - epoch)
         return int(str(_to_secs(delta_from_epic)
                        ).replace(".", "")[:length].ljust(length, "0"))
@@ -143,15 +151,19 @@ class CookieManager(object):
     @staticmethod
     def _expire_time(epoch=datetime.datetime(1970, 1, 1), length=10,
                      expires_in=datetime.timedelta(days=1)):
-        """Returns a string of time based on epoch date at a set
-         length of integers with an additional timedelta as specified."""
+        """
+        Returns a string of time based on epoch date at a set
+         length of integers with an additional timedelta as specified.
+         """
         delta_from_epic = (datetime.datetime.utcnow() - epoch + expires_in)
         return int(str(_to_secs(delta_from_epic)
                        ).replace(".", "")[:length].ljust(length, "0"))
 
     def _connect(self):
-        """Overrideable SQL connection
-        function to return connection and cursor"""
+        """
+        Overrideable SQL connection
+        function to return connection and cursor
+        """
         conn = sqlite3.Connection(self.db)
         cur = conn.cursor()
         return conn, cur
@@ -174,7 +186,8 @@ class CookieManager(object):
         raise NotImplementedError()
 
     def _row_to_dict(self, row):
-        """Child class must override.
+        """
+        Child class must override.
 
         The dictionary must contain:
         - host
@@ -191,7 +204,8 @@ class CookieManager(object):
     def add_cookie(self, host, name, value, path="/",
                    expires_in=datetime.timedelta(days=1), secure=0,
                    http_only=0, **kwargs):
-        """Abstracted function to add a cookie to the database.
+        """
+        Abstracted function to add a cookie to the database.
         Additional browser specific keyword arguments are availablee,
         listed in their respective classes.
 
@@ -219,7 +233,8 @@ class CookieManager(object):
             conn.close()
 
     def delete_cookie(self, host, name):
-        """Abstracted function to remove a cookie from the database.
+        """
+        Abstracted function to remove a cookie from the database.
 
         :param host: URL of cookie, must be exact
         :param name: The name of the cookie, such as "SESSIONID"
@@ -241,7 +256,8 @@ class CookieManager(object):
     def update_cookie(self, host, name, value, path="/",
                       expires_in=datetime.timedelta(days=1),
                       secure=0, http_only=0, ignore_missing=True, **kwargs):
-        """Delete and re-add a cookie with different value.
+        """
+        Delete and re-add a cookie with different value.
 
         :param host: URL to associate cookie with
         :param name: The name of the cookie, such as "SESSIONID"
@@ -276,7 +292,8 @@ class CookieManager(object):
             conn.close()
 
     def find_cookies(self, host="", name="", value=""):
-        """Search for cookies based of the host, name or cookie contents.
+        """
+        Search for cookies based of the host, name or cookie contents.
         All values are loose, and will be compared by converting to lowercase
         and check if they exist "in" the field specified.
 
@@ -320,7 +337,8 @@ class CookieManager(object):
         return results
 
     def dump(self):
-        """Dump the database to a list of dictionaries.
+        """
+        Dump the database to a list of dictionaries.
 
         :return: list of every row from the Cookies database, as dictionaries
         """
@@ -335,7 +353,16 @@ class CookieManager(object):
         finally:
             conn.close()
 
+    def load(self, cookie_eater_dump, overwrite=False):
+        """
+        Load a previous dump into the database. 
+        
+        :return: 
+        """
+        conn, cur = self._connect()
 
-
+        for row in cookie_eater_dump:
+            #self.add_cookie()
+            pass
 
 
