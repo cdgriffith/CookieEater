@@ -353,16 +353,3 @@ class CookieManager(object):
         finally:
             conn.close()
 
-    def load(self, cookie_eater_dump, overwrite=False):
-        """
-        Load a previous dump into the database. 
-        
-        :return: 
-        """
-        conn, cur = self._connect()
-
-        for row in cookie_eater_dump:
-            #self.add_cookie()
-            pass
-
-

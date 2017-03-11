@@ -17,5 +17,5 @@ install:
     - pip install -r requirements.txt
     - pip install -r requirements-text.txt
     - pip install coveralls
-script: pytest --cov=reusables test/
+script: pytest --cov=cookie_eater test/
 after_success: coveralls
