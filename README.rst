@@ -6,6 +6,11 @@ CookieEater
 Overview
 ~~~~~~~~
 
+.. code::
+
+        pip install cookie-eater
+
+
 Firefox and Chrome Cookie management. (Chrome requires SQLite 3.8 or greater.)
 
 

@@ -1,0 +1,21 @@
+[report]
+omit =
+    */python?.?/*
+    */site-packages/nose/*
+    */test/*
+    */pypy/*
+    */nose/*
+    */.*/*
+    */*.egg-info/*
+exclude_lines =
+    pragma: no cover
+    except Exception
+    raise BrowserException
+    conn.close
+    return cookies
+    return expanded
+    raise InvalidSchema
+    elif "darwin"
+    eilf "windows"
+    return "mac"
+    return "windows"

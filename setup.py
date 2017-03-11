@@ -25,7 +25,7 @@ setup(
     author=attrs['author'],
     tests_require=["pytest", "coverage >= 3.6", "tox",  "pytest-cov",
                    "reusables"],
-    install_requires=[],
+    install_requires=["reusables"],
     author_email='chris@cdgriffith.com',
     description='Browser Cookie Management',
     long_description=long_description,
