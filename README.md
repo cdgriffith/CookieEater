@@ -1,2 +1,0 @@
-# CookieEater
-Browser Cookie Management
