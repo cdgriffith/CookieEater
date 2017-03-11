@@ -1,18 +1,31 @@
 CookieEater
 ===========
 
+|BuildStatus| |CoverageStatus|
+
 **Browser Cookie Management**
 
 Overview
-~~~~~~~~
+--------
+
+Firefox and Chrome Cookie management. (Chrome requires SQLite 3.8 or greater.)
+
+Install
+-------
 
 .. code::
 
         pip install cookie-eater
 
+CI tests run on:
 
-Firefox and Chrome Cookie management. (Chrome requires SQLite 3.8 or greater.)
+* Python 2.6+
+* Python 3.3+
+* Pypy
 
+
+Example Usage
+~~~~~~~~~~~~~
 
 .. code:: python
 
@@ -29,3 +42,9 @@ Firefox and Chrome Cookie management. (Chrome requires SQLite 3.8 or greater.)
         fox.delete_cookie("example.com", "MyCookie")
 
 
+
+
+.. |CoverageStatus| image:: https://coveralls.io/repos/github/cdgriffith/CookieEater/badge.svg?branch=master
+   :target: https://coveralls.io/github/cdgriffith/CookieEater?branch=master
+.. |BuildStatus| image:: https://travis-ci.org/cdgriffith/Reusables.svg?branch=master
+    :target: https://travis-ci.org/cdgriffith/Reusables
